@@ -17,13 +17,13 @@ def copy_images(original_root, save_root, classes):
     for c in tqdm(classes, desc=f'TOTAL'):  ## generated는 train에만 들어가게 바꿔.
         random.seed(42)
 
-        file_names = [i.split('.')[0] for i in os.listdir(os.path.join(original_root, c, 'image')) if
+        file_names = [i.split('.')[0] for i in os.listdir(os.path.join(original_root, 'image', c)) if
                       i.endswith('.jpg')]
 
         for file_name in tqdm(file_names, desc=f'{c}'):
-            shutil.copy(os.path.join(original_root, c, 'image', file_name + '.jpg'),
+            shutil.copy(os.path.join(original_root, 'image', c, file_name + '.jpg'),
                         os.path.join(save_root, 'image'))
-            shutil.copy(os.path.join(original_root, c, 'annotation', file_name + '.json'),
+            shutil.copy(os.path.join(original_root, 'annotation', c, file_name + '.json'),
                         os.path.join(save_root, 'annotation'))
 
 def merge_json(root):
