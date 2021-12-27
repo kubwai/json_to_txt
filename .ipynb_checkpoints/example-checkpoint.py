@@ -7,6 +7,7 @@ import pprint
 
 import argparse
 
+from preprocessing import *
 
 from Format import VOC, COCO, UDACITY, KITTI, YOLO
 
@@ -23,6 +24,7 @@ parser.add_argument('--manifest_path', type=str,
 parser.add_argument('--cls_list_file', type=str,
                     help='directory of *.names file', default="./")
 
+parser.add_argument('--original_path', type=str, default='test_dataset', help='test dataset path')
 
 args = parser.parse_args()
 
@@ -138,5 +140,24 @@ if __name__ == '__main__':
         "output_path": args.convert_output_path,
         "cls_list": args.cls_list_file,
     }
+    
+    
+    
+    original_root = '../' + args.original_path
+    save_root = '../preprocessed_dataset'
+
+    classes = ['PET', 'PS', 'PP', 'PE']
+
+    copy_images(original_root, save_root, classes)
+    merge_json(save_root)
+    os.makedirs(os.path.join(save_root, 'annotation','yolov4'), exist_ok=True)
+
+
+    json_files = [i for i in os.listdir(os.path.join(save_root, 'annotation')) if i.endswith('json')]
+    for jf in tqdm(json_files):
+        os.remove(f"{save_root}/annotation/{jf}")
 
     main(config)
+    
+    make_txt(save_root)
+    
