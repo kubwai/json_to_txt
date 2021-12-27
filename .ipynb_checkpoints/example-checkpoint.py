@@ -143,8 +143,8 @@ if __name__ == '__main__':
     
     
     
-    original_root = '../' + args.original_path
-    save_root = '../preprocessed_dataset'
+    original_root = args.original_path
+    save_root = 'preprocessed_dataset'
 
     classes = ['PET', 'PS', 'PP', 'PE']
 

@@ -9,14 +9,18 @@ import argparse
 
 
 def copy_images(original_root, save_root, classes):
-
+    
+    os.makedirs(os.path.join(save_root, 'image'), exist_ok=True)
+    os.makedirs(os.path.join(save_root, 'annotation' ), exist_ok=True)
+    
+    
     for c in tqdm(classes, desc=f'TOTAL'):  ## generated는 train에만 들어가게 바꿔.
         random.seed(42)
 
-        file_names = [i.split('.')[0] for i in os.listdir(os.path.join(original_root, d, c, 'image')) if
+        file_names = [i.split('.')[0] for i in os.listdir(os.path.join(original_root, c, 'image')) if
                       i.endswith('.jpg')]
 
-        for file_name in tqdm(file_names, desc=f'{c}_{d}'):
+        for file_name in tqdm(file_names, desc=f'{c}'):
             shutil.copy(os.path.join(original_root, c, 'image', file_name + '.jpg'),
                         os.path.join(save_root, 'image'))
             shutil.copy(os.path.join(original_root, c, 'annotation', file_name + '.json'),
@@ -76,12 +80,4 @@ def make_txt(save_root):
             pass
             
                 
-                
-                
 
-
-
-
-
-# python preprocessing.py --file_path {test 데이터셋 폴더이름}
-# python convert2Yolo/example.py --datasets COCO --img_path preprocessed_dataset/image --label preprocessed_dataset/annotation/mask_rcnn/test.json --convert_output_path preprocessed_dataset/annotation/yolov4 --img_type ".jpg" --cls_list_file convert2Yolo/names.txt
