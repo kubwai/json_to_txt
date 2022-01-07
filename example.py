@@ -150,14 +150,14 @@ if __name__ == '__main__':
 
     copy_images(original_root, save_root, classes)
     merge_json(save_root)
-    os.makedirs(os.path.join(save_root, 'annotation','yolov4'), exist_ok=True)
+    os.makedirs(os.path.join(save_root, 'annotations','yolov4'), exist_ok=True)
 
 
-    json_files = [i for i in os.listdir(os.path.join(save_root, 'annotation')) if i.endswith('json')]
+    json_files = [i for i in os.listdir(os.path.join(save_root, 'annotations')) if i.endswith('json')]
     for jf in tqdm(json_files):
-        os.remove(f"{save_root}/annotation/{jf}")
+        os.remove(f"{save_root}/annotations/{jf}")
 
     main(config)
     
-    make_txt(save_root)
+#     make_txt(save_root)  # 물체가 없는 이미지가 있다면 사용
     
