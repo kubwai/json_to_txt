@@ -36,7 +36,7 @@ def merge_json(root):
     cnt = 1
     for idx, json_id in enumerate(tqdm(json_list)):
 
-        input_json = os.path.join(root, 'annotation', json_id)
+        input_json = os.path.join(root, 'annotations', json_id)
 
         with open(input_json) as json_reader:
             dataset = json.load(json_reader)
