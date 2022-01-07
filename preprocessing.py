@@ -17,7 +17,7 @@ def copy_images(original_root, save_root, classes):
     for c in tqdm(classes, desc=f'TOTAL'):  ## generated는 train에만 들어가게 바꿔.
         random.seed(42)
 
-        file_names = [i.split('.')[0] for i in os.listdir(os.path.join(original_root, 'image', c)) if
+        file_names = [i.split('.')[0] for i in os.listdir(os.path.join(original_root, 'imags', c)) if
                       i.endswith('.jpg')]
 
         for file_name in tqdm(file_names, desc=f'{c}'):
