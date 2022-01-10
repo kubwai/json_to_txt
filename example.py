@@ -24,7 +24,7 @@ parser.add_argument('--manifest_path', type=str,
 parser.add_argument('--cls_list_file', type=str,
                     help='directory of *.names file', default="./")
 
-parser.add_argument('--original_path', type=str, default='test_dataset', help='test dataset path')
+parser.add_argument('--original_path', type=str, default='Test', help='test dataset path')
 
 args = parser.parse_args()
 
@@ -144,7 +144,7 @@ if __name__ == '__main__':
     
     
     original_root = args.original_path
-    save_root = 'preprocessed_dataset'
+    save_root = '/root/preprocessed_dataset'
 
     classes = ['PET', 'PS', 'PP', 'PE']
 
