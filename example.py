@@ -26,6 +26,9 @@ parser.add_argument('--cls_list_file', type=str,
 
 parser.add_argument('--original_path', type=str, default='Test', help='test dataset path')
 
+parser.add_argument('--save_root', type=str, default='/root/preprocessed_dataset', help='save dataset path')
+parser.add_argument('--object_det', action='store_true', help='check model')
+
 args = parser.parse_args()
 
 
@@ -142,22 +145,24 @@ if __name__ == '__main__':
     }
     
     
-    
     original_root = args.original_path
-    save_root = '/root/preprocessed_dataset'
+    save_root = args.save_root
 
-    classes = ['PET', 'PS', 'PP', 'PE']
-
+    classes = ['PET', 'PS', 'PP', 'PE']    
+    
     copy_images(original_root, save_root, classes)
     merge_json(save_root)
     os.makedirs(os.path.join(save_root, 'annotations','yolov4'), exist_ok=True)
 
-
+  
     json_files = [i for i in os.listdir(os.path.join(save_root, 'annotations')) if i.endswith('json')]
     for jf in tqdm(json_files):
-        os.remove(f"{save_root}/annotations/{jf}")
-
-    main(config)
+        os.remove(f'{save_root}/annotations/{jf}')
     
+    
+    if arg.object_det:
+        os.makedirs(os.path.join(save_root, 'annotations','yolov4'), exist_ok=True)
+        main(config)
+
 #     make_txt(save_root)  # 물체가 없는 이미지가 있다면 사용
     
