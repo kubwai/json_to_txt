@@ -160,7 +160,7 @@ if __name__ == '__main__':
         os.remove(f'{save_root}/annotations/{jf}')
     
     
-    if arg.object_det:
+    if args.object_det:
         os.makedirs(os.path.join(save_root, 'annotations','yolov4'), exist_ok=True)
         main(config)
 
